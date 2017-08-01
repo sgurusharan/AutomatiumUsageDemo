@@ -1,11 +1,9 @@
 package page;
 
 import com.automatium.action.ActionChain;
-import com.automatium.action.TypeText;
 import com.automatium.data.TestData;
 import com.automatium.page.BaseHomePage;
 import com.automatium.page.BasePage;
-import com.automatium.utils.SeleniumUtils;
 import org.openqa.selenium.By;
 
 /**
@@ -80,13 +78,18 @@ public class DemoHomePage extends BaseHomePage {
         return this;
     }
 
-    public DemoHomePage enterRegisterEmail(String emailId) {
-        type(REGISTER_EMAIL, emailId);
+    public DemoHomePage enterRegistrationEmailID(String emailId) {
+        clearAndType(REGISTER_EMAIL, emailId);
         return this;
     }
 
     public DemoHomePage enterRegistrationPassword(String password) {
-        type(REGISTER_PASSWORD, password);
+        clearAndType(REGISTER_PASSWORD, password);
+        return this;
+    }
+
+    public DemoHomePage enterRegistrationRePassword(String password) {
+        clearAndType(REGISTER_RE_PASSWORD, password);
         return this;
     }
 
@@ -102,12 +105,15 @@ public class DemoHomePage extends BaseHomePage {
 
     public BasePage loginAsTestUser1() {
 
-        return ActionChain.start(this)
+        ActionChain.start(this)
                 .type(getLocator(LOGIN_EMAIL), testData.get("email1"))
                 .type(getLocator(LOGIN_PASSWORD), testData.get("password1"))
                 .click(getLocator(LOGIN_BUTTON))
                 .perform();
 
+        waitForPage(WelcomePage.class, 10L);
+
+        return getCurrentPage();
     }
 
     @Override
