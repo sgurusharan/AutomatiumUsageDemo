@@ -1,5 +1,6 @@
 package page;
 
+import com.automatium.config.TestConfiguration;
 import com.automatium.page.BaseHomePage;
 import com.automatium.page.BasePage;
 import com.automatium.page.TestEntryPage;
@@ -8,7 +9,7 @@ import org.openqa.selenium.By;
 /**
  * Created by sgurusharan on 8/1/17.
  */
-public class LogoutPage extends BasePage {
+public class LogoutPage extends TestEntryPage {
     private static final String HOME_PAGE_LINK = "homePageLink";
 
     @Override
@@ -26,5 +27,10 @@ public class LogoutPage extends BasePage {
     public boolean isAtPage() {
         return (true
             && getTitle().equals("Logout Automatium Demo"));
+    }
+
+    @Override
+    public void navigateToPageFromHomePage(BaseHomePage homePage) {
+        getCurrentPage().gotoURL(TestConfiguration.getSingletonInstance().getStartUrl() + "/logout.jsp");
     }
 }

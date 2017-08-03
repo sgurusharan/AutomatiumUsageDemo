@@ -3,6 +3,7 @@ import com.automatium.test.AutomatiumTest;
 import com.automatium.utils.TestUtils;
 import org.junit.Test;
 import page.DemoHomePage;
+import page.LogoutPage;
 import page.WelcomePage;
 
 /**
@@ -10,20 +11,17 @@ import page.WelcomePage;
  */
 public class DirectPageAccessTest extends AutomatiumTest {
     @Override
-    protected Class<WelcomePage> getExpectedFirstPage() {
-        return WelcomePage.class;
+    protected Class<LogoutPage> getExpectedFirstPage() {
+        return LogoutPage.class;
     }
 
     @Test
     public void testAccessWelcomePageWithoutLoggingIn() {
 
-        currentPage.goBackToHomePage();
-        currentPage = currentPage.getCurrentPage();
-
         currentPage = ActionChain.start(currentPage)
                 .gotoUrl(testConfiguration.getStartUrl() + "/welcome.jsp")
                 .perform();
 
-        TestUtils.assertTrue(currentPage.waitForPage(DemoHomePage.class, 10L), "FAIL: Accessing welcome page without logging in does not take user back to home page");
+        TestUtils.assertTrue(currentPage instanceof WelcomePage && currentPage.waitForPage(DemoHomePage.class, 10L), "FAIL: Accessing welcome page without logging in does not take user back to home page");
     }
 }
