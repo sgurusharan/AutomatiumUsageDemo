@@ -1,0 +1,9 @@
+enter registration email ID,abc@abc
+enter registration password,testPassword
+enter registration rePassword,testPassword
+click register button
+is notification displayed?,Please enter a valid email ID
+enter registration email ID,abc@abc.com
+enter registration password,testPassword1
+click register button
+is notification displayed?,Passwords do not match
